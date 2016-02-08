@@ -8,6 +8,8 @@
 </head>
 <body>
 
+  <!-- EcmaScript5 support for old browsers -->
+  <script type="text/javascript" src="js/lib/es5-sham.min.js"></script>
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <!-- Подключаем API карт -->
@@ -17,14 +19,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <!-- Waypoints. For scrolling control. -->
   <script type="text/javascript" src="js/lib/jquery.waypoints.min.js"></script>
-  <!-- Animation move.js -->
-  <script type="text/javascript" src="js/lib/move.min.js"></script>
+  <!-- Animation TweenMax -->
+  <script src="js/lib/tween-max.min.js"></script>
   <!-- AirPlaza on Yandex.Map -->
   <script type="text/javascript" src="js/map.js" charset="utf-8"></script>
   <!-- Landing interactions -->
   <script type="text/javascript" src="js/landing.js"></script>
-  <!-- Slick image gallery -->
-  <script type="text/javascript" src="slick/slick.min.js"></script>
   <!-- Slider setup -->
   <script type="text/javascript" src="js/slider.js"></script>
   <!-- LiveReload -->

@@ -7,15 +7,11 @@ updateView = ->
 
 $window = $(window)
 $window.on 'scroll resize', updateView
-# $window.trigger 'scroll'
 $(document).ready updateView
 
-# link scrolling
+# link autoscrolling
 $(document).on 'click', 'nav a', ->
-	# console.log '???'
 	$('html, body').animate scrollTop: $($.attr(this, 'href') ).offset().top - navHeight(), 500
-	# $('nav a.active').removeClass 'active'
-	# $(@).addClass 'active'
 	false
 
 $ ->
@@ -86,30 +82,30 @@ $ ->
 	)
 	outSliderTime $('#time-slider').slider('value')
 
-	$('#programs li').each (index) ->
-		move(@).x(100)
-		.duration(0)
-		.then()
-			.x(-100)
-			.ease('out')
-			.delay("0.#{2 * index}")
-			.duration('0.3s')
-		.pop().end()
-
 	$sections = $('section')
 
 	activateSection = (index) ->
 		id = $sections.eq(index).attr('id')
 		$activeLink = $("nav a[href='##{id}']")
-		$activeLink.addClass 'active'
 		zoom = 0.9
-		move($activeLink.get(0)).scale(zoom).end()
+		tuk = ->
+			tl = new TimelineMax()
+			tl.add TweenMax.to $activeLink, 0.1,
+				css:
+					scale: 0.95
+			tl.add TweenMax.to $activeLink, 0.1,
+				css:
+					scale: 1
+
+		TweenMax.to $activeLink, 0.2,
+			className: '+=active'
+			onComplete: tuk
 
 	deactivateSection = (index) ->
 		id = $sections.eq(index).attr('id')
 		$activeLink = $("nav a[href='##{id}']")
-		$activeLink.removeClass 'active'
-		move($activeLink.get(0)).scale(1).end()
+		TweenMax.to $activeLink, 0.2,
+			className: '-=active'
 
 	curIndex = 0
 	activateSection(curIndex)
@@ -127,15 +123,15 @@ $ ->
 	# animate elements with class 'popup'
 	popupShift = 100
 	$('.popup').each ->
-		move(@).y(popupShift).duration(0).end()
+		TweenMax.to @, 0, y: popupShift
 		el = @
 		waypoint = new Waypoint(
 			element: el
 			handler: (direction) ->
 				if direction == 'down'
-					move(el).y(0).duration("0.#{600 + Math.random() * 400}").end()
+					TweenMax.to el, 0.6 + Math.random() * 0.4, y: 0
 				else
-					move(el).y(popupShift).duration(0).end()
+					TweenMax.to el, 0, y: popupShift
 			offset: ->
 				Waypoint.viewportHeight()
 		)
